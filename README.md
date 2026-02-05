@@ -78,17 +78,6 @@ State | React Hooks |
 
 ---
 
-## 📦 Folder Structure
-
-src/
- ├ api/
- ├ auth/
- ├ components/
- ├ layout/
- ├ pages/
- ├ hooks/
- └ utils/
-
 ## 🔐 Security Notes
 
 - JWT stored securely via Amplify session
@@ -106,7 +95,7 @@ src/
 ✔ Dashboard 
 ✔ Realtime polling
 
-##📜 Future Improvements
+## 📜 Future Improvements
 
 - WebSocket realtime updates
 - Team collaboration
