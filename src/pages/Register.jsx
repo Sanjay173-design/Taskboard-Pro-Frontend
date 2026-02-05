@@ -14,17 +14,20 @@ export default function Register() {
       await signUp({
         username: email,
         password,
+        options: {
+          userAttributes: { email },
+        },
       });
 
       toast.success("Account created 🎉");
-      navigate("/login");
+      navigate("/confirm", { state: { email } });
     } catch (err) {
       toast.error(err.message);
     }
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-neutral-950 text-white text-white dark:text-whitetext-white">
+    <div className="min-h-screen relative overflow-hidden bg-neutral-950 text-white dark:text-white">
       {/* Background glow */}
       <div className="absolute inset-0">
         <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-pink-600/20 blur-[120px]" />
@@ -37,7 +40,7 @@ export default function Register() {
             <h1 className="text-3xl font-semibold tracking-tight">
               Taskboard Pro
             </h1>
-            <p className="text-sm text-white text-white dark:text-whitetext-white/60">
+            <p className="text-sm text-white dark:text-white/60">
               Start managing work like a pro
             </p>
           </div>

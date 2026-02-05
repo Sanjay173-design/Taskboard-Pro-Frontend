@@ -10,6 +10,7 @@ import Tasks from "./pages/Tasks";
 import Dashboard from "./pages/Dashboard";
 import ActivityFeed from "./pages/ActivityFeed";
 import { Toaster } from "react-hot-toast";
+import ConfirmSignup from "./pages/ConfirmSignup";
 
 export default function App() {
   return (
@@ -19,6 +20,8 @@ export default function App() {
           {/* Public */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/confirm" element={<ConfirmSignup />} />
+
           {/* Protected App */}
           <Route
             path="/app"
