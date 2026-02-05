@@ -87,13 +87,13 @@ State | React Hooks |
 
 ## 🎯 Production Highlights
 
-✔ Serverless backend
-✔ Premium SaaS UI
-✔ Kanban drag drop
-✔ File attachments
-✔ Activity tracking
-✔ Dashboard 
-✔ Realtime polling
+- Serverless backend
+- Premium SaaS UI
+- Kanban drag drop
+- File attachments
+- Activity tracking
+- Dashboard 
+- Realtime polling
 
 ## 📜 Future Improvements
 
