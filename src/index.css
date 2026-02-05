@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/* Global base styles */
+html {
+  font-family: Inter, system-ui, sans-serif;
+  background-color: #f8fafc;
+}
+
+body {
+  color: #0f172a;
+}
