@@ -1,16 +1,119 @@
-# React + Vite
+# 🚀 TaskBoard Pro — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Premium SaaS-style Task Management UI built with **React + Vite + TailwindCSS**, integrated with AWS Serverless backend (Lambda + DynamoDB + Cognito + S3 + Redis).
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live Demo
+👉 https:taskboard-pro-frontend.vercel.app
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🧠 Features
 
-## Expanding the ESLint configuration
+### 🔐 Authentication
+- AWS Cognito Login / Register
+- Secure JWT session handling
+- Protected routes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🧭 App Shell
+- Collapsible Sidebar
+- Header with Logout
+- Responsive layout
+
+### 📊 Dashboard
+- Total tasks
+- Completed tasks
+- In progress
+- Overdue
+- High priority
+- Status chart
+
+### 📁 Workspaces
+- Create workspace
+- List user workspaces
+
+### 📂 Projects
+- Create project per workspace
+- Redis cache invalidation sync
+
+### ✅ Tasks (Core Module)
+- Create tasks
+- Drag & Drop Kanban board
+- Status updates (Todo → Progress → Done)
+- Search + Filters
+- Priority & Due date support
+
+### 📝 Task Details Modal
+- Edit title
+- Edit description
+- Status update
+- Priority update
+- Due date picker
+- Comments
+- Activity timeline
+
+### 📎 Attachments
+- Upload file (S3 presigned URL)
+- Download file
+- Delete file
+- Preview attachments
+
+### 📡 Realtime Feel
+- Polling auto refresh
+
+---
+
+## 🏗️ Tech Stack
+
+| Layer | Tech |
+|---|---|
+Frontend | React + Vite |
+UI | TailwindCSS |
+Auth | AWS Cognito |
+Hosting | Vercel |
+Drag Drop | dnd-kit |
+Charts | Recharts |
+State | React Hooks |
+
+---
+
+## 📦 Folder Structure
+
+src/
+ ├ api/
+ ├ auth/
+ ├ components/
+ ├ layout/
+ ├ pages/
+ ├ hooks/
+ └ utils/
+
+## 🔐 Security Notes
+
+- JWT stored securely via Amplify session
+- Backend protected via Cognito authorizer
+- Presigned URLs for S3 upload/download
+- Redis cache invalidation implemented
+
+## 🎯 Production Highlights
+
+✔ Serverless backend
+✔ Premium SaaS UI
+✔ Kanban drag drop
+✔ File attachments
+✔ Activity tracking
+✔ Dashboard 
+✔ Realtime polling
+
+##📜 Future Improvements
+
+- WebSocket realtime updates
+- Team collaboration
+- Role based access
+- Notifications
+- Mobile responsive optimization
+
+👨‍💻 Author
+
+HN Sanjay
