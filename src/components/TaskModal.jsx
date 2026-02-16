@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { apiFetch } from "../api/client";
 import { useAuth } from "../auth/AuthContext";
 import toast from "react-hot-toast";
+import { subscribeRealtime } from "../realtime/socket";
 
 export default function TaskModal({ task, onClose }) {
   const { accessToken } = useAuth();
@@ -177,13 +178,32 @@ export default function TaskModal({ task, onClose }) {
           message: commentText,
         }),
       });
+
       toast.success("Comment Posted");
       setCommentText("");
+
+      // Refresh locally
       loadTask();
     } catch (err) {
       console.error("Add comment failed", err);
     }
   };
+
+  /* ---------------- REALTIME COMMENTS ---------------- */
+
+  useEffect(() => {
+    if (!task?.taskId) return;
+
+    const unsubscribe = subscribeRealtime((event) => {
+      console.log("Realtime event in modal:", event);
+
+      if (event.type === "COMMENT_CREATED" && event.taskId === task.taskId) {
+        loadTask();
+      }
+    });
+
+    return unsubscribe;
+  }, [task?.taskId]);
 
   /* ---------------- UPLOAD ---------------- */
 

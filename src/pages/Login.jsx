@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signIn } from "aws-amplify/auth";
+import { signIn, fetchAuthSession } from "aws-amplify/auth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -19,6 +19,20 @@ export default function Login() {
     try {
       setLoading(true);
 
+      /* ⭐ STEP 1 — Check existing session */
+      try {
+        const session = await fetchAuthSession();
+
+        if (session?.tokens?.accessToken) {
+          toast.success("Already logged in");
+          navigate("/app/dashboard");
+          return;
+        }
+      } catch {
+        // No session → continue login
+      }
+
+      /* ⭐ STEP 2 — Normal login */
       await signIn({
         username: email,
         password,
@@ -27,9 +41,18 @@ export default function Login() {
       toast.success("Welcome back 🚀");
 
       navigate("/app/dashboard");
-      window.location.reload();
+
+      // ❌ Removed reload (VERY IMPORTANT)
+      // window.location.reload();
     } catch (err) {
-      console.error(err);
+      console.error("Login error:", err);
+
+      /* ⭐ HANDLE ALREADY AUTHENTICATED */
+      if (err.name === "UserAlreadyAuthenticatedException") {
+        navigate("/app/dashboard");
+        return;
+      }
+
       toast.error(err.message || "Login failed");
     } finally {
       setLoading(false);
@@ -37,7 +60,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-neutral-950 text-white dark:text-white">
+    <div className="min-h-screen relative overflow-hidden bg-neutral-950 text-white">
       {/* 🌌 Premium Gradient Background */}
       <div className="absolute inset-0">
         <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-purple-600/20 blur-[120px]" />
@@ -53,7 +76,7 @@ export default function Login() {
             <h1 className="text-3xl font-semibold tracking-tight">
               Taskboard Pro
             </h1>
-            <p className="text-sm text-white dark:text-white/60">
+            <p className="text-sm text-white/60">
               Professional task management for modern teams
             </p>
           </div>
@@ -66,7 +89,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3
-              placeholder:text-white dark:text-white/40
+              placeholder:text-white/40
               focus:outline-none focus:border-white/30 focus:bg-white/10 transition"
             />
 
@@ -76,7 +99,7 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3
-              placeholder:text-white dark:text-white/40
+              placeholder:text-white/40
               focus:outline-none focus:border-white/30 focus:bg-white/10 transition"
             />
           </div>
@@ -92,11 +115,11 @@ export default function Login() {
           </button>
 
           {/* Footer */}
-          <p className="text-center text-sm text-white dark:text-white/50">
+          <p className="text-center text-sm text-white/50">
             New here?{" "}
             <span
               onClick={() => navigate("/register")}
-              className="text-white dark:text-white font-medium cursor-pointer hover:underline"
+              className="text-white font-medium cursor-pointer hover:underline"
             >
               Create account
             </span>

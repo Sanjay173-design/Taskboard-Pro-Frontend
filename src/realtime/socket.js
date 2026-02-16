@@ -1,26 +1,49 @@
-export function connectRealtime(onMessage) {
-  console.log("CONNECT REALTIME CALLED"); // ⭐ ADD THIS
+const WS_URL = import.meta.env.VITE_WS_URL;
 
-  const ws = new WebSocket(
-    "wss://j4b1byke9c.execute-api.eu-north-1.amazonaws.com/dev",
-  );
+let socket = null;
+let listeners = [];
 
-  ws.onopen = () => {
-    console.log("Realtime connected");
+export function initRealtime() {
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    return socket;
+  }
+
+  console.log("🌐 Creating WS connection");
+
+  socket = new WebSocket(WS_URL);
+
+  socket.onopen = () => {
+    console.log("✅ Realtime connected");
   };
 
-  ws.onmessage = (msg) => {
-    console.log("Realtime event:", msg.data);
-    onMessage?.(msg.data);
+  socket.onmessage = (e) => {
+    console.log("🔥 WS RAW MESSAGE ARRIVED", e.data);
+
+    try {
+      const data = JSON.parse(e.data);
+
+      // Notify ALL listeners
+      listeners.forEach((cb) => cb(data));
+    } catch (err) {
+      console.warn("Invalid WS message", e.data);
+    }
   };
 
-  ws.onerror = (e) => {
-    console.error("Realtime WS error", e);
+  socket.onclose = () => {
+    console.log("❌ WS disconnected");
+
+    setTimeout(() => {
+      initRealtime();
+    }, 3000);
   };
 
-  ws.onclose = () => {
-    console.log("Realtime disconnected");
-  };
+  return socket;
+}
 
-  return ws;
+export function subscribeRealtime(callback) {
+  listeners.push(callback);
+
+  return () => {
+    listeners = listeners.filter((cb) => cb !== callback);
+  };
 }

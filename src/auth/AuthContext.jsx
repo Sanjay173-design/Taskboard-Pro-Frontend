@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { fetchAuthSession, getCurrentUser, signOut } from "aws-amplify/auth";
 
 const AuthContext = createContext(null);
+import { initRealtime } from "../realtime/socket";
 
 export function AuthProvider({ children }) {
   const [accessToken, setAccessToken] = useState(null);
@@ -15,7 +16,6 @@ export function AuthProvider({ children }) {
       try {
         const currentUser = await getCurrentUser();
         const session = await fetchAuthSession();
-
         setUser(currentUser);
         setAccessToken(session.tokens.accessToken.toString());
       } catch (err) {
@@ -28,6 +28,16 @@ export function AuthProvider({ children }) {
 
     loadSession();
   }, []);
+
+  /* ---------------- INIT REALTIME AFTER AUTH ---------------- */
+
+  useEffect(() => {
+    if (!accessToken) return;
+
+    console.log("🚀 Auth ready → Starting realtime");
+
+    initRealtime();
+  }, [accessToken]);
 
   /* ---------------- LOGOUT ---------------- */
 

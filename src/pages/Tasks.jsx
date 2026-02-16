@@ -4,7 +4,7 @@ import { useAuth } from "../auth/AuthContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import TaskModal from "../components/TaskModal";
 import toast from "react-hot-toast";
-import { connectRealtime } from "../realtime/socket";
+import { subscribeRealtime } from "../realtime/socket";
 
 import {
   DndContext,
@@ -61,7 +61,7 @@ export default function Tasks() {
     loadTasks();
 
     // Realtime WebSocket
-    const ws = connectRealtime(() => {
+    const ws = subscribeRealtime(() => {
       loadTasks();
     });
 
@@ -70,7 +70,6 @@ export default function Tasks() {
 
     // Cleanup
     return () => {
-      ws.close();
       clearInterval(interval);
     };
   }, [accessToken, projectId]);
