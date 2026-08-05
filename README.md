@@ -1,27 +1,27 @@
-# 🚀 TaskBoard Pro — Frontend
+# TaskBoard Pro — Frontend
 
 Premium SaaS-style Task Management UI built with **React + Vite + TailwindCSS**, integrated with AWS Serverless backend (Lambda + DynamoDB + Cognito + S3 + Redis).
 
 ---
 
-## 🌐 Live Demo
-👉 https:taskboard-pro-frontend.vercel.app
+## Live Demo
+ https:taskboard-pro-frontend.vercel.app
 
 ---
 
-## 🧠 Features
+## Features
 
-### 🔐 Authentication
+### Authentication
 - AWS Cognito Login / Register
 - Secure JWT session handling
 - Protected routes
 
-### 🧭 App Shell
+### App Shell
 - Collapsible Sidebar
 - Header with Logout
 - Responsive layout
 
-### 📊 Dashboard
+### Dashboard
 - Total tasks
 - Completed tasks
 - In progress
@@ -29,22 +29,22 @@ Premium SaaS-style Task Management UI built with **React + Vite + TailwindCSS**,
 - High priority
 - Status chart
 
-### 📁 Workspaces
+### Workspaces
 - Create workspace
 - List user workspaces
 
-### 📂 Projects
+### Projects
 - Create project per workspace
 - Redis cache invalidation sync
 
-### ✅ Tasks (Core Module)
+### Tasks (Core Module)
 - Create tasks
 - Drag & Drop Kanban board
 - Status updates (Todo → Progress → Done)
 - Search + Filters
 - Priority & Due date support
 
-### 📝 Task Details Modal
+### Task Details Modal
 - Edit title
 - Edit description
 - Status update
@@ -53,18 +53,18 @@ Premium SaaS-style Task Management UI built with **React + Vite + TailwindCSS**,
 - Comments
 - Activity timeline
 
-### 📎 Attachments
+### Attachments
 - Upload file (S3 presigned URL)
 - Download file
 - Delete file
 - Preview attachments
 
-### 📡 Realtime Feel
+### Realtime Feel
 - Polling auto refresh
 
 ---
 
-## 🏗️ Tech Stack
+## Tech Stack
 
 | Layer | Tech |
 |---|---|
@@ -78,14 +78,14 @@ State | React Hooks |
 
 ---
 
-## 🔐 Security Notes
+## Security Notes
 
 - JWT stored securely via Amplify session
 - Backend protected via Cognito authorizer
 - Presigned URLs for S3 upload/download
 - Redis cache invalidation implemented
 
-## 🎯 Production Highlights
+## Production Highlights
 
 - Serverless backend
 - Premium SaaS UI
@@ -95,7 +95,7 @@ State | React Hooks |
 - Dashboard 
 - Realtime polling
 
-## 📜 Future Improvements
+## Future Improvements
 
 - WebSocket realtime updates
 - Team collaboration
